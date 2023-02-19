@@ -1,0 +1,56 @@
+clc; %hapus error di command windows
+clear; %hapus workspace
+gambar1 = imread('2.jpg'); %ambil gambar atau file.
+a = imresize(gambar1, [320,240]); %set ukuran gambar 320 x 240
+b = rgb2gray(a); %mengubah citra berwarna menjadi citra grayscale.
+c = histeq(b); %Tingkatkan kontras gambar intensitas menggunakan penyamaan histogram (perubahan ke Equalization).
+
+% derajat keabuan grayscale (2^8)
+L = 256;
+% menghitung/menentukan kolom dan baris dari matriks gambar
+[baris, kolom] = size(b); %jumlah pixel
+
+% untuk berapa banyaknya suatu nilai
+% fungsi zeros untuk membuat matrix yang semua datanaya bernila 0
+nrj = zeros(L, 1); %sebagai penampung matriks hasil matrik 1 nrj 
+tmp_sma_nrj = zeros(L, 1); %sebagai penampung matriks hasil hitung 
+sk = zeros(L, 1); %sebagai penampung matriks hasil akhir
+
+% iterasi untuk mencari berapa banyaknya suatu nilai dari citra
+for i = 1:baris %iterasi baris
+    for j = 1:kolom %iterasi kolom
+        % menambahkan banyaknya nilai ke matriks nrj
+        value = b(i, j); %mengeck angka simpan di vulue
+        nrj(value + 1) = nrj(value + 1) + 1; %nrj 
+    end
+end
+
+Sma_nrj = 0; % inisialisasi variabel sigma
+
+% iterasi untuk menghitung matriks hasil
+for i = 1:L
+    Sma_nrj = Sma_nrj + nrj(i); %sigma nrj 
+    tmp_sma_nrj(i) = Sma_nrj;  
+    % rumus histogram equalization dengan persamaa 5-6
+    sk(i) = round((L - 1) / (baris * kolom) * tmp_sma_nrj(i)); %sk
+end
+
+% membuat matriks hasil
+I_out = sk(b + 1);
+
+subplot(3,4,1), imshow(a); %tampilkan gambar
+title('Gambar Original');
+subplot(3,4,2), imhist(a); %tampilkan grafik
+
+subplot(3,4,3), imshow(b); %tampilkan gambar
+title('Gambar Diubah ke rgb2gray');
+subplot(3,4,4), imhist(b); %tampilkan grafik
+
+subplot(3,4,5), imshow(c); %tampilkan gambar
+title('Gambar menggunakan Fungsi Histeq()'); 
+subplot(3,4,6), imhist(c); %tampilkan grafik
+
+subplot(3,4,7), imshow(I_out, []); %tampilkan gambar
+title('Equalization persamaan 5-6');
+subplot(3,4,8), imhist(uint8(I_out)); %tampilkan grafik
+%fungsi uint8() digunakan untuk mengubah string menjadi bilangan integer.

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Box Animation</title>
+	<style type="text/css">
+		.satu {
+		    width: 100px;
+		    height: 100px;
+		    background-color: red;
+		    -webkit-animation-name: exampleone; /* Safari 4.0 - 8.0 */
+		    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+		    animation-name: exampleone;
+		    animation-duration: 4s;
+		}
+		.dua {
+		    width: 100px;
+		    height: 100px;
+		    background-color: red;
+		    -webkit-animation-name: exampletwo; /* Safari 4.0 - 8.0 */
+		    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+		    animation-name: exampletwo;
+		    animation-duration: 4s;
+		}
+			/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes example {
+		    from {background-color: red;}
+		    to {background-color: yellow;}
+		}
+
+		/* Standard syntax */
+		@keyframes exampleone {
+		    from {background-color: red;}
+		    to {background-color: yellow;}
+		}
+		@keyframes exampletwo {
+		    0%   {background-color: red;}
+		    25%  {background-color: yellow;}
+		    50%  {background-color: blue;}
+		    100% {background-color: green;}
+		}
+</style>
+</head>
+<body>
+
+<p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.</p>
+
+<div class="satu"></div>
+<br>
+<div  class="dua"></div>
+
+<p><b>Note:</b> When an animation is finished, it changes back to its original style.</p>
+<pre>
+	Ketika Anda menentukan gaya CSS di dalam aturan @keyframes, animasi secara bertahap akan berubah dari gaya saat ini ke gaya baru pada waktu-waktu tertentu.
+	Agar animasi berfungsi, Anda harus mengikat animasi ke elemen.
+	Contoh berikut mengikat animasi "contoh" ke elemen . Animasi akan berlangsung selama 4 detik, dan secara bertahap akan mengubah warna latar belakang 
+	elemen  dari "merah" menjadi "kuning":
+</pre>
+</body>
+</html>
